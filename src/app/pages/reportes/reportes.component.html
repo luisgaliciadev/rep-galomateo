@@ -1,0 +1,103 @@
+<div class="col-12 animated fadeInRight">
+    <div class="row" *ngIf="loading">
+        <div class="col-sm-12">
+            <div class="alert alert-warning text-center">
+                <strong>Cargando...</strong>
+                <br>
+                <i class="fa fa-refresh fa-spin fa-2x"></i>
+                <br>
+                <span>Por Favor Espere...</span>
+            </div>
+        </div>    
+    </div>
+
+    <div class="row" *ngIf="!loading">
+        <div class="col-12">
+            <div class="card" style="overflow: auto">
+                <div class="card-body">
+
+                    <div class="text-left">
+                        <button [disabled] ="activeButton" type="button" class="btn waves-effect waves-light btn-rounded btn-default" (click)="printer()">
+                            <i class="mdi mdi-printer"></i>
+                            Imprimir
+                        </button>
+
+                        <!-- <button [disabled] ="activeButton" type="button" class="btn waves-effect waves-light btn-rounded btn-success">
+                            <i class="mdi mdi-file-excel"></i>
+                            Exportar
+                        </button> -->
+                    </div>  
+                
+                    <br/>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label>Desde:</label>
+                                <div class="input-group">                                            
+                                    <input [(ngModel)]="fDesde" name="fDesde" type="date" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label>Hasta:</label>
+                                <div class="input-group">                                            
+                                    <input [(ngModel)]="fHasta" name="fHasta" type="date" class="form-control" required>
+                                    
+                                    <button type="button" class="btn btn-success waves-effect waves-light m-r-10" (click)="getRecibos(fDesde, fHasta, search)">
+                                        <i class="fa fa-search"></i>
+                                        Consultar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div> 
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input [(ngModel)]="search" type="text" class="form-control" placeholder="Compañia" (keyup.enter)="getRecibos(fDesde, fHasta, search)" (keyup)="activeButtons()">                        
+                            <div class="input-group-addon"><i class="mdi mdi-delete-forever pointer" data-toggle="tooltip" data-placement="top" title="Borrar Busqueda" (click)="clear()"></i></div>
+                        </div>
+                    </div>
+                   
+                    <h3>Listado de Recibos (<small>{{totalRegistros}}</small>)</h3>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Compañia</th>
+                                <th>Nro. Recibo</th>
+                                <th>Importe</th>
+                                <th>Motivo</th>
+                                <th>Fecha Devolución</th>
+                                <th>Fecha Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let recibo of recibos">
+                                <td>{{recibo.compania}}</td>
+                                <td>{{recibo.nro}}</td>
+                                <td>{{recibo.importe}}</td>
+                                <td>{{recibo.motivo}}</td>
+                                <td>{{recibo.fhDevolucion}}</td>
+                                <td>{{recibo.fhRegistro}}</td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- <button class="btn btn-secondary" (click)="changePage(-5)">
+                        Anterior
+                    </button>
+
+                    <button class="btn btn-secondary" (click)="changePage(+5)">
+                        Siguiente
+                    </button> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,35 @@
+<div>    
+    <button type="button" class="btn waves-effect waves-light btn-rounded btn-default"  (click)="toPrint()">
+            <i class="mdi mdi-printer"></i>
+            Imprimir
+    </button>
+</div>
+
+
+<div style="margin-left: 20px; margin-top: 20px;" id="report">
+    <h2 style="margin-left: 220px; text-decoration: underline">Listado de Recibos | Desde: {{fDesde}} - Hasta: {{fHasta}}</h2>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Compañia</th>
+                <th>Nro. Recibo</th>
+                <th>Importe</th>
+                <th>Motivo</th>
+                <th>Fecha Devolución</th>
+                <th>Fecha Registro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let recibo of recibos">
+                <td>{{recibo.compania}}</td>
+                <td>{{recibo.nro}}</td>
+                <td>{{recibo.importe}}</td>
+                <td>{{recibo.motivo}}</td>
+                <td>{{recibo.fhDevolucion}}</td>
+                <td>{{recibo.fhRegistro}}</td>                                
+            </tr>
+        </tbody>
+    </table>
+
+</div>
